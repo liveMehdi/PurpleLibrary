@@ -1,0 +1,83 @@
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import log from "../assets/log.png";
+import { Link } from "react-router-dom";
+
+function Nav({ cartSize }) {
+  function openMenu() {
+    document.body.classList += " menu--open";
+  }
+  function closeMenu() {
+    document.body.classList.remove("menu--open");
+  }
+
+  window.addEventListener("scroll", navBorder, true);
+  function navBorder() {
+    if (window.scrollY > 150) {
+      document.querySelector("nav").classList.add("border");
+      window.removeEventListener("scroll", navBorder, true);
+    }
+  }
+
+  return (
+    <>
+      <nav>
+        <div className="nav__container">
+          <Link to="/" onClick={() => window.scrollTo(0, 0)}>
+            <img src={log} alt="" className="logo" />
+          </Link>
+          <ul className="nav__links">
+            <li className="nav__list">
+              <Link
+                to="/"
+                className="nav__link"
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                Home
+              </Link>
+            </li>
+            <li className="nav__list">
+              <Link to="/books" className="nav__link">
+                Books
+              </Link>
+            </li>
+            <button className="btn__menu" onClick={openMenu}>
+              <FontAwesomeIcon icon="bars" />
+            </button>
+            <li className="nav__icon">
+              <Link to="/cart" className="nav__link">
+                <FontAwesomeIcon icon="shopping-cart" />
+              </Link>
+              <span className="cart__length">{cartSize}</span>
+            </li>
+          </ul>
+          <div className="menu__backdrop">
+            <button className="btn__menu btn__menu--close" onClick={closeMenu}>
+              <FontAwesomeIcon icon="times" />
+            </button>
+            <ul className="menu__links">
+              <li className="menu__list">
+                <Link to="/" className="menu__link" onClick={closeMenu}>
+                  Home
+                </Link>
+              </li>
+              <li className="menu__list">
+                <Link to="/books" className="menu__link" onClick={closeMenu}>
+                  Books
+                </Link>
+              </li>
+              <li className="menu__list">
+                <Link to="/cart" className="menu__link" onClick={closeMenu}>
+                  Cart
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div className="nav-rep"></div>
+    </>
+  );
+}
+
+export default Nav;
