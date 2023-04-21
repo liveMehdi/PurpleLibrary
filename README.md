@@ -14,8 +14,8 @@ https://purple-library.vercel.app/
 * Animations
 * Repsonsive UI
 
-## Stack
+## Tech/Stack
 * React
 * CSS
-* AOS
-* Vercel
+* AOS Animations
+* Vercel CI/CD
